@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Curso.dev do Filipe Deschamps",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "lint:check": "npx prettier --check .",
@@ -20,7 +21,38 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "babel": "@babel/preset-react",
     "jest": "^29.2.0",
+    "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.3.2"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!**/next/**",
+      "!**/next/server/**",
+      "!**/models/**",
+      "!**/coverage/**",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ],
+    "coverageDirectory": "./coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    }
   }
 }
