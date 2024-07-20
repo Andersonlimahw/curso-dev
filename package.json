@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Curso.dev do Filipe Deschamps",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "dev": "next dev",
     "lint:check": "npx prettier --check .",
@@ -30,6 +29,7 @@
   },
   "babel": {
     "presets": [
+      "@babel/preset-env",
       "@babel/preset-react"
     ]
   },
