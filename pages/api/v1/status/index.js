@@ -1,4 +1,4 @@
-import database from "../../../../infra/database";
+import database from "infra/database";
 
 function status(request, response) {
   database
