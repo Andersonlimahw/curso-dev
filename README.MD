@@ -10,7 +10,7 @@ run on shell
 ## Connect to database
 
 ```shell
-  psql -h localhost -p 5432 -U postgres -d curso_dev
+  psql -h localhost -p 5432 -U postgres -d cursodev -W
 ```
 
 para parar
