@@ -1,11 +1,14 @@
 services:
   database:
     image: "postgres:16.0-alpine3.18"
+    env_file:
+      - ../.env
     environment:
-      POSTGRES_DB: "curso_dev"
-      POSTGRES_PASSWORD: "cursodev"
+      POSTGRES_DB: "${POSTGRES_DB}"
+      POSTGRES_USER: "${POSTGRES_USER}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:${POSTGRES_PORT}"
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
