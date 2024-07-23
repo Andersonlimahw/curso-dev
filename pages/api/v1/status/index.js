@@ -5,7 +5,7 @@ function status(request, response) {
     .query()
     .then((res) => {
       console.log(res);
-      response.status(200).json({ status: "ok" });
+      response.status(200).json({ status: "ok", result: res });
     })
     .catch((error) => {
       console.error(error);

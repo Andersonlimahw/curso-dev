@@ -3,8 +3,6 @@ import pg from "pg";
 const { Client } = pg;
 
 async function query() {
-  console.log("env => ", process.env);
-  console.log("env POSTGRES_PASSWORD => ", process.POSTGRES_PASSWORD);
   const client = new Client({
     user: process.env.POSTGRES_USER,
     host: process.env.POSTGRES_HOST,

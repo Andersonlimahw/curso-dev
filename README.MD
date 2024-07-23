@@ -4,7 +4,8 @@ with docker runnning
 run on shell
 
 ```shell
-  docker compose  -f infra/compose.yaml up -d
+  npm run services:up
+  npm run dev
 ```
 
 ## Connect to database
@@ -13,8 +14,8 @@ run on shell
   psql -h localhost -p 5432 -U postgres -d cursodev -W
 ```
 
-para parar
+to stop
 
 ```shell
-  docker compose  -f infra/compose.yaml down
+  npm run services:down
 ```
