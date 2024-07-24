@@ -3,11 +3,15 @@ import database from "infra/database";
 function status(request, response) {
   database
     .query()
-    .then((res) => {
-      console.log(res);
+    .then((databaseResponse) => {
       response.status(200).json({
         status: "ok",
-        ...res,
+        dependencies: {
+          database: {
+            ...databaseResponse,
+          },
+        },
+
         updated_at: new Date().toISOString(),
       });
     })

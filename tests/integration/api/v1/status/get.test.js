@@ -19,15 +19,17 @@ describe("status API", () => {
   test("GET API should return updated_at property", async () => {
     const response = await axios(API_URL);
     const responseBody = response.data;
-    const expectedProperty = new Date(responseBody.updated_at).toISOString();
+    const expectedProperty = responseBody.updated_at;
+    const parsedData = new Date(expectedProperty).toISOString();
 
-    expect(expectedProperty).toBeDefined();
+    expect(parsedData).toBeDefined();
   });
 
   test("GET API should return server_version property", async () => {
     const response = await axios(API_URL);
     const responseBody = response.data;
-    const expectedProperty = responseBody.server_version;
+    const { dependencies } = responseBody;
+    const expectedProperty = dependencies.database.server_version;
 
     expect(expectedProperty).toBeDefined();
   });
@@ -35,15 +37,26 @@ describe("status API", () => {
   test("GET API should return max_connections property", async () => {
     const response = await axios(API_URL);
     const responseBody = response.data;
-    const expectedProperty = responseBody.max_connections;
+    const { dependencies } = responseBody;
+    const expectedProperty = dependencies.database.max_connections;
 
     expect(expectedProperty).toBeDefined();
   });
 
-  test("GET API should return used_connections property", async () => {
+  test("GET API should return opened_connections property", async () => {
     const response = await axios(API_URL);
     const responseBody = response.data;
-    const expectedProperty = responseBody.used_connections;
+    const { dependencies } = responseBody;
+    const expectedProperty = dependencies.database.opened_connections;
+
+    expect(expectedProperty).toBeDefined();
+  });
+
+  test("GET API should return checkpoint_timeout property", async () => {
+    const response = await axios(API_URL);
+    const responseBody = response.data;
+    const { dependencies } = responseBody;
+    const expectedProperty = dependencies.database.checkpoint_timeout;
 
     expect(expectedProperty).toBeDefined();
   });
