@@ -50,6 +50,7 @@ describe("status API", () => {
     const expectedProperty = dependencies.database.opened_connections;
 
     expect(expectedProperty).toBeDefined();
+    expect(expectedProperty).toBeGreaterThanOrEqual(0);
   });
 
   test("GET API should return checkpoint_timeout property", async () => {
