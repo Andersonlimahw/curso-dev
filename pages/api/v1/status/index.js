@@ -6,10 +6,15 @@ function status(request, response) {
     SELECT version() as server_version,
     (SELECT setting FROM pg_settings WHERE name = 'checkpoint_timeout') AS checkpoint_timeout,
     (SELECT setting FROM pg_settings WHERE name = 'max_connections') AS max_connections,
-    (SELECT count(1)::int FROM pg_stat_activity WHERE datname = '${databaseName}') AS opened_connections;
+    (SELECT count(1)::int FROM pg_stat_activity WHERE datname = $1) AS opened_connections;
   `;
+
+  const queryObject = {
+    text: queryParamsInput,
+    values: [databaseName],
+  };
   database
-    .query(queryParamsInput)
+    .query(queryObject)
     .then((databaseResponse) => {
       response.status(200).json({
         status: "ok",

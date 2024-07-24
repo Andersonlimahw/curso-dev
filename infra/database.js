@@ -2,7 +2,7 @@ import pg from "pg";
 
 const { Client } = pg;
 
-async function query(queryParamsInput) {
+async function query(queryObjectInput) {
   const client = new Client({
     user: process.env.POSTGRES_USER,
     host: process.env.POSTGRES_HOST,
@@ -10,10 +10,13 @@ async function query(queryParamsInput) {
     port: process.env.POSTGRES_PORT,
     database: process.env.POSTGRES_DB,
   });
+  await client.connect();
 
   try {
-    await client.connect();
-    const result = await client.query(queryParamsInput);
+    const result = await client.query(
+      queryObjectInput.text,
+      queryObjectInput.values,
+    );
     const [row] = result.rows;
     return row;
   } catch (error) {
