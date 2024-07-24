@@ -5,7 +5,11 @@ function status(request, response) {
     .query()
     .then((res) => {
       console.log(res);
-      response.status(200).json({ status: "ok", result: res });
+      response.status(200).json({
+        status: "ok",
+        ...res,
+        updated_at: new Date().toISOString(),
+      });
     })
     .catch((error) => {
       console.error(error);

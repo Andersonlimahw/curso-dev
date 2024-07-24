@@ -11,9 +11,14 @@ async function query() {
     database: process.env.POSTGRES_DB,
   });
   await client.connect();
-  const result = await client.query("SHOW server_version;");
+  const result = await client.query(`
+      SELECT version() as server_version,
+      (SELECT setting from pg_settings WHERE name = 'max_connections') AS max_connections,
+      (SELECT count(1) from pg_stat_activity) AS used_connections;
+    `);
   await client.end();
-  return result.rows;
+  const [row] = result.rows;
+  return row;
 }
 
 export default {
