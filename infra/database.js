@@ -11,17 +11,15 @@ async function query(queryObjectInput) {
     database: process.env.POSTGRES_DB,
     ssl: process.env.NODE_ENV === "development" ? false : true,
   });
-  await client.connect();
 
   try {
-    const result = await client.query(
-      queryObjectInput.text,
-      queryObjectInput.values,
-    );
+    await client.connect();
+    const { text, values } = queryObjectInput;
+    const result = await client.query(text, values);
     const [row] = result.rows;
     return row;
   } catch (error) {
-    console.error(error);
+    console.trace(error);
     throw error;
   } finally {
     await client.end();
